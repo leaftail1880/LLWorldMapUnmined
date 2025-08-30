@@ -2,7 +2,7 @@ on:
   release:
     types:
       - published
-  
+
 jobs:
   build:
     runs-on: windows-latest
@@ -32,7 +32,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: WorldMapUnmined-windows-x64-${{ github.sha }}
           path: |
             bin/
 
@@ -49,7 +49,7 @@ jobs:
       - uses: softprops/action-gh-release@v1
         with:
           body: |
-            ${{ steps.extract-release-notes.outputs.release_notes }}
+            WorldMapUnmined
 
   upload-to-release:
     needs:
@@ -63,17 +63,17 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: WorldMapUnmined-windows-x64-${{ github.sha }}
           path: artifact
 
       - run: |
           cp CHANGELOG.md LICENSE README.md artifact/
 
       - run: |
-          zip -r ../${{ github.event.repository.name }}-windows-x64.zip *
+          zip -r ../WorldMapUnmined-windows-x64.zip *
         working-directory: artifact
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{ github.event.repository.name }}-windows-x64.zip
+            WorldMapUnmined-windows-x64.zip

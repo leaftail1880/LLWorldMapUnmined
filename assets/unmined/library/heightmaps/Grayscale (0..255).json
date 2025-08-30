@@ -1,0 +1,13 @@
+{
+  "Steps": [
+    {
+
+      "Position": 0,
+      "Color": "#000000"
+    },
+    {
+      "Position": 255,
+      "Color": "#ffffff"
+    }
+  ]
+}

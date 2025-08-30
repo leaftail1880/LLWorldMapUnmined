@@ -2,6 +2,7 @@
 # Prerequisites
 *.d
 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -15,7 +16,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+# *.dll
 
 # Fortran module files
 *.mod
@@ -28,7 +29,7 @@
 *.lib
 
 # Executables
-*.exe
+# *.exe
 *.out
 *.app
 
@@ -558,3 +559,6 @@ fabric.properties
 /.idea/
 /.vscode/
 /bin/
+
+
+!assets/*

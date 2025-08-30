@@ -1,0 +1,53 @@
+{
+  "Steps":
+  [
+    {
+      "Position": -64,
+      "Color": "hsl(150, 0, 20)"
+    },
+    {
+      "Position": 0,
+      "Color": "hsl(150, 0, 30)"
+    },
+    {
+      "Position": 32,
+      "Color": "hsl(150, 30, 30)"
+    },
+    {
+      "Position": 62,
+      "Color": "hsl(120, 60, 30)"
+    },
+    {
+      "Position": 80,
+      "Color": "hsl(120, 70, 40)"
+    },
+    {
+      "Position": 96,
+      "Color": "hsl(90, 60, 50)"
+    },
+    {
+      "Position": 112,
+      "Color": "hsl( 72, 80, 40)"
+    },
+    {
+      "Position": 128,
+      "Color": "hsl( 48, 80, 30)"
+    },
+    {
+      "Position": 144,
+      "Color": "hsl( 48, 50, 30)"
+    },
+    {
+      "Position": 160,
+      "Color": "hsl( 48, 20, 60)"
+    },
+    {
+      "Position": 255,
+      "Color": "hsl( 48, 10, 80)"
+    },
+    {
+      "Position": 384,
+      "Color": "hsl( 48, 0, 100)"
+    }
+  ]
+}
