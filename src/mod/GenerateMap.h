@@ -1,10 +1,12 @@
 #pragma once
 
+#include <atomic>
 #include <functional>
 #include <string>
 
+
 namespace world_map_unmined {
-extern bool isWorking;
+extern std::atomic_bool isWorking;
 
 using Feedback = std::function<void(const std::string&)>;
 using OnFinish = std::function<void()>;

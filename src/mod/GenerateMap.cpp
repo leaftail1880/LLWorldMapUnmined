@@ -2,10 +2,10 @@
 #include "Config.h"
 #include "Entry.h"
 #include "Interval.h"
-#include "mc/server/PropertiesSettings.h"
+#include "ll/api/utils/StringUtils.h"
 #include "mod/Config.h"
 #include "mod/Entry.h"
-#include <ll/api/service/Bedrock.h>
+#include <atomic>
 
 
 #include <filesystem>
@@ -26,7 +26,7 @@
 
 namespace world_map_unmined {
 
-bool isWorking = false;
+std::atomic_bool isWorking = false;
 
 void ControlResourceUsage(HANDLE process) {
     // Job
@@ -87,7 +87,7 @@ bool Exec(const Feedback& feedback, const std::string& worldPath) {
         // Wait
         DWORD res;
         if ((res = WaitForSingleObject(sh.hProcess, maxWait)) == WAIT_TIMEOUT || res == WAIT_FAILED) {
-            feedback("unmined process timeout!");
+            feedback("Unmined process timeout!");
         }
         CloseHandle(sh.hProcess);
     } catch (const std::exception& e) {
@@ -101,20 +101,10 @@ bool Exec(const Feedback& feedback, const std::string& worldPath) {
 void GenerateMap(const OnFinish& onFinish, const Feedback& feedback) {
     loadConfig();
     try {
-        isWorking  = true;
-        auto props = ll::service::getPropertiesSettings();
-        if (props) {
-            std::string levelname = props->mLevelName;
-            auto        worldPath = std::filesystem::current_path() / "worlds" / std::filesystem::path(levelname);
-            logger.info("Exec: {} Params: {} World: {}", config.execFile, config.execParams, worldPath.string());
-            Exec(feedback, worldPath.string());
-
-            logger.info("Done");
-            IntervalOnCallbackFinished();
-            onFinish();
-        } else {
-            logger.error("Faield to get server properties for level name");
-        }
+        auto worldPath = std::filesystem::current_path() / "worlds" / getLevelName();
+        Exec(feedback, worldPath.string());
+        IntervalOnCallbackFinished();
+        onFinish();
     } catch (const std::exception& e) {
         feedback("Exception in GenerateMap! " + std::string(e.what()));
     }

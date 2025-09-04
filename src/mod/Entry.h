@@ -32,6 +32,8 @@ private:
 bool saveConfig();
 bool loadConfig();
 
+std::string getLevelName();
+
 #define logger world_map_unmined::Mod::getInstance().getSelf().getLogger()
 
 } // namespace world_map_unmined

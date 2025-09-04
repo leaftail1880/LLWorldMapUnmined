@@ -2,9 +2,12 @@
 
 #include "Command.h"
 #include "Config.h"
+#include "Entry.h"
 #include "Interval.h"
 #include "ll/api/Config.h"
 #include "ll/api/mod/RegisterHelper.h"
+#include "mc/server/PropertiesSettings.h"
+#include <ll/api/service/Bedrock.h>
 
 
 namespace world_map_unmined {
@@ -34,7 +37,19 @@ bool loadConfig() {
 
 bool Mod::load() { return true; }
 
+std::string levelName;
+
+std::string getLevelName() { return levelName; }
+
 bool Mod::enable() const {
+    auto props = ll::service::getPropertiesSettings();
+    if (!props) {
+        logger.error("Faield to get server properties for level name");
+        return false;
+    }
+
+    levelName = props->mLevelName;
+
     if (!loadConfig()) {
         getSelf().getLogger().warn("Cannot load configurations from {}", getConfigPath());
         getSelf().getLogger().info("Saving default configurations");
@@ -53,6 +68,7 @@ bool Mod::disable() {
 }
 
 bool Mod::unload() { return true; }
+
 
 } // namespace world_map_unmined
 
